@@ -8,13 +8,8 @@ describe("Добавление персоны", function()
 			document.querySelector('.id').value = 'f';
 			document.querySelector('.fname').value = '1';
 			document.querySelector('.lname').value = '2';
-<<<<<<< HEAD
 			document.querySelector('.comment').value = '333';
-			assert.equal($scope.newPerson($scope), false);  
-=======
-			document.querySelector('.comment').value = '333';			
 			assert.equal($scope.newPerson($scope), false);
->>>>>>> refs/remotes/origin/Edit
 		});
 		
 		/*! Тест на отсутствие значения поля id */
@@ -72,8 +67,8 @@ describe("Добавление персоны", function()
 			assert.equal($scope.newPerson($scope), false);
 		});
 		
-		/*! Тест на превышение допустимой длинны поля lname */
-		it("Тест на превышение допустимой длинны поля lname", function() 
+		/*! Тест на превышение допустимой длинны поля fname */
+		it("Тест на превышение допустимой длинны поля fname", function() 
 		{			
 			$scope = angular.element($("#pc")).scope();
 			document.querySelector('.id').value = '1';
@@ -164,8 +159,8 @@ describe("Редактирование персоны", function()
 			assert.equal($scope.savePerson(1), false);
 		});
 		
-		/*! Тест на превышение допустимой длинны поля lname */
-		it("Тест на превышение допустимой длинны поля lname", function() 
+		/*! Тест на превышение допустимой длинны поля fname */
+		it("Тест на превышение допустимой длинны поля fname", function() 
 		{			
 			$scope = angular.element($("#ec")).scope();
 			document.querySelector('.id_edit_1').value = '1';
