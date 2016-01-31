@@ -8,8 +8,13 @@ describe("Добавление персоны", function()
 			document.querySelector('.id').value = 'f';
 			document.querySelector('.fname').value = '1';
 			document.querySelector('.lname').value = '2';
+<<<<<<< HEAD
 			document.querySelector('.comment').value = '333';
 			assert.equal($scope.newPerson($scope), false);  
+=======
+			document.querySelector('.comment').value = '333';			
+			assert.equal($scope.newPerson($scope), false);
+>>>>>>> refs/remotes/origin/Edit
 		});
 		
 		/*! Тест на отсутствие значения поля id */
