@@ -138,7 +138,7 @@
 				<!-- Кнопка добавления -->
 				<div class="btn-group">	
 				  <br>
-				  <button type="button" id="bNew" class="btn btn-default bNew" ng-click="newPerson()">Добавить</button>
+				  <button type="button" class="btn btn-default" ng-click="newPerson()">Добавить</button>
 				</div>
 				
 			  </div>
@@ -225,7 +225,7 @@
 			</div>
 			
 			<!-- Панель с функционалом юнит-тестов -->
-			<div class="panel panel-warning" ng-controller="personController">
+			<div class="panel panel-warning">
 			  <!-- Заголовок -->
 			  <div class="panel-heading">
 				<h3 class="panel-title">Тестирование</h3>
@@ -234,7 +234,7 @@
 			  <div class="panel-body">				  
 				
 				<!-- Кнопка запуска тестов -->
-				<div class="btn-group">
+				<div class="btn-group">	
 				  <button type="button" class="btn btn-default" onclick="mocha.run()">Запуск тестов</button>
 				</div>					
 				
