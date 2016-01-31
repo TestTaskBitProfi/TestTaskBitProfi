@@ -27,8 +27,13 @@
 							}
 						];		
 		
+<<<<<<< HEAD
 		/*! Обработка события newPerson() - Добавление новой персоны  */
 		$scope.newPerson = function() 
+=======
+		/*! Обработка события newPerson() - Добавление новой персоны */
+		$scope.newPerson = function()
+>>>>>>> refs/remotes/origin/master
 			{
 			
 			/*! Валидация */	
