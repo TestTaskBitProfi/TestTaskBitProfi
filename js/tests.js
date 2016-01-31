@@ -8,7 +8,7 @@ describe("Добавление персоны", function()
 			document.querySelector('.id').value = 'f';
 			document.querySelector('.fname').value = '1';
 			document.querySelector('.lname').value = '2';
-			document.querySelector('.comment').value = '333';
+			document.querySelector('.comment').value = '333';			
 			assert.equal($scope.newPerson($scope), false);
 		});
 		
