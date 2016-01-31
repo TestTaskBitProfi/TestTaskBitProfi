@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<!-- Тестовое задание Дмитрия Пучкина для БитПрофи -->
+<!-- Компонент - Front-html -->
+<!-- Создано: 30.01.2016 -->
+
+
+<html lang="en" ng-app="myApp">
+
+  <!-- Шапка -->
+  <head>
+ 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Заголовок -->
+    <title>Тестовое задание Дмитрия Пучкина для БитПрофи</title>
+
+	<!-- подключаем стили Mocha, для отображения результатов -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css">
+
+	<!-- подключаем библиотеку Mocha -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.js"></script>
+
+	<!-- настраиваем Mocha: предстоит BDD-тестирование -->
+	<script>mocha.setup('bdd');</script>
+
+	<!-- подключаем chai -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js"></script
+
+	<!-- выносим assert в глобальную область -->
+	<script>var assert = chai.assert;</script>
+	
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- AngularJS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
+  </head>
+  
+  <!-- Тело -->
+  <body>
+	<!-- Стиль для не валидных полей -->
+	<style>	
+		.bg-danger{background-color: #F2DEDE;}
+	</style>
+
+  
+	  <!-- Главный блок -->
+	  <div class="container">  
+	  
+		<!-- Заголовок -->
+		<div class="page-header">
+			<h1>Тестовое задание для БитПрофи
+			<small>Выполнил: Дмитрий Пучкин</small>
+			</h1>
+		</div>
+		
+		<!-- Панели -->
+		<div id="pc" class="panel-group" ng-controller="personController">
+		
+			<!-- Панель с описанием -->
+			<div class="panel panel-primary">
+			  <!-- Заголовок -->
+			  <div class="panel-heading">
+				<h3 class="panel-title">Описание</h3>
+			  </div>
+			  <!-- Текст -->
+			  <div class="panel-body">
+				<br>Задание:
+				<br>Используя AngularJS и Bootstrap реализовать CRUD интерфейс для сущности 
+				<br>Person:
+				<br>- id (int, required)
+				<br>- firstName (string 255, required)
+				<br>- lastName (string 255, required)
+				<br>- comment (long text, optional)
+				<br>В качестве источника данных использовать фейк REST API.
+				<br>Написать юнит-тесты используя mochajs, chaijs, либо другой привычный тестовый фреймворк.
+				<br>Результатом должен быть git репозиторий (github/bitbucket), при этом функционалы листинга/редактирования/удаления должны быть расположены в разных ветках с финальным merge в мастере.
+				<br>
+				<br>Описание:
+				<br>ВАЖНО!!! Для работы скриптов требуется подключение к интернету!
+				<br>Для добавления записи необходимо корректно заполнить поля на панели "Добавление записи" и нажать кнопку "Добавить". Для генерации из источника данных необходимо нажать "Заполнить из REST API".
+				<br>Для редактирования записи необходимо нажать <button type="button" class="glyphicon glyphicon-pencil"></button>
+				<br>Для удаления записи необходимо нажать <button type="button" class="glyphicon glyphicon-remove"></button>
+				<br>Для запуска серии тестов необходимо нажать кнопку "Запуск тестов" на панели "Тестирование".
+				<br>
+			  
+			  </div>
+			</div>
+			
+			<!-- Панель с функционалом добавления -->
+			<div class="panel panel-success">
+			  <!-- Заголовок -->
+			  <div class="panel-heading">
+				<h3 class="panel-title">Добавление записей</h3>
+			  </div>
+			  <!-- Тело панели -->
+			  <div class="panel-body">
+
+				<!-- Элемент ввода ID -->			  
+				<div class="input-group">
+				  <span class="input-group-addon">ID</span>
+				  <input type="text" id="input_id" class="form-control id" ng-model="id" ng-required>
+				  <span class="input-group-addon">required</span>
+				</div>
+			  
+				<!-- Элемент ввода First Name -->			  
+				<div class="input-group">
+				  <span class="input-group-addon">First Name</span>
+				  <input type="text" id="input_fname" class="form-control fname" ng-model="fname" ng-required>
+				  <span class="input-group-addon">required</span>
+				</div>
+				
+				<!-- Элемент ввода Last Name -->			  
+				<div class="input-group">
+				  <span class="input-group-addon">Last Name</span>
+				  <input type="text" id="input_lname" class="form-control lname" ng-model="lname" ng-required>
+				  <span class="input-group-addon">required</span>
+				</div>
+				
+				<!-- Элемент ввода Comment -->			  
+				<div class="input-group">
+				  <span class="input-group-addon">Comment</span>
+				  <input type="text" id="input_comment" class="form-control comment" ng-model="comment" ng-optional>
+				  <span class="input-group-addon">optional</span>
+				</div>				
+				
+				<!-- Кнопки -->
+				<!-- Кнопка заполнения из REST API -->
+				<div class="btn-group">	
+				  <br>
+				  <button type="button" class="btn btn-default" onclick="GetFakeRestAPIData()">Заполнить из REST API</button>
+				 </div>	
+
+				<!-- Кнопка добавления -->
+				<div class="btn-group">	
+				  <br>
+				  <button type="button" class="btn btn-default" ng-click="newPerson()">Добавить</button>
+				</div>
+				
+			  </div>
+			</div>
+
+			<!-- Панель с функционалом листинга -->
+			<div class="panel panel-info">
+			  <!-- Заголовок -->
+			  <div class="panel-heading">
+				<h3 class="panel-title">Просмотр записей</h3>
+			  </div>
+			  <!-- Тело панели -->
+			  <div class="panel-body">
+			  
+				<!-- Таблица с записями -->
+				  <table class="table">
+					<thead>
+					  <tr>
+						<th>№</th>
+						<th>ID</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Comment</th>
+						<th></th>						
+					  </tr>
+					</thead>
+					<tbody >
+					  <!-- Устанавливаем директиву обновления -->
+					  <tr id="ec" ng-repeat="person in persons" ng-controller="personEditController">
+						
+						<td>
+							<!-- Версия при отображении -->
+							<span>{{$index + 1}}</span>							
+						</td>
+						
+						<td>
+							<!-- Версия при отображении -->
+							<span ng-hide="editorEnabled">{{person.id}}</span>
+							<!-- Версия при редактировании -->
+							<span ng-show="editorEnabled"><input type="text" class="form-control id_edit_{{$index + 1}}" ng-model="id_edit" ng-required</span>
+						</td>
+						
+						<td>
+							<!-- Версия при отображении -->
+							<span ng-hide="editorEnabled">{{person.fname}}</span>
+							<!-- Версия при редактировании -->
+							<span ng-show="editorEnabled"><input type="text" class="form-control fname_edit_{{$index + 1}}" ng-model="fname_edit" ng-required</span>
+						</td>
+						
+						<td>
+							<!-- Версия при отображении -->
+							<span ng-hide="editorEnabled">{{person.lname}}</span>
+							<!-- Версия при редактировании -->
+							<span ng-show="editorEnabled"><input type="text" class="form-control lname_edit_{{$index + 1}}" ng-model="lname_edit" ng-required</span>
+						</td>
+						
+						<td>
+							<!-- Версия при отображении -->
+							<span ng-hide="editorEnabled">{{person.comment}}</span>
+							<!-- Версия при редактировании -->
+							<span ng-show="editorEnabled"><input type="text" class="form-control comment_edit_{{$index + 1}}" ng-model="comment_edit" ng-required</span>
+						</td>
+						
+						<td>							
+							<!-- Версия при отображении -->
+							<!-- Кнопки редактирования и удаления -->
+							<span ng-hide="editorEnabled">
+								<button type="button" class="glyphicon glyphicon-pencil" ng-click="enableEditor()"></button>
+								<button type="button" class="glyphicon glyphicon-remove" ng-click="delPerson($index + 1)"></button>
+							</span>
+							<!-- Версия при редактировании -->
+							<!-- Кнопки сохранения и отмены -->
+							<span ng-show="editorEnabled">
+								<button type="button" class="glyphicon glyphicon-ok" ng-click="savePerson($index + 1)"></button>
+								<button type="button" class="glyphicon glyphicon-remove" ng-click="disableEditor()"></button>
+							</span>							
+						</td>
+						
+					  </tr>
+					</tbody>
+				  </table>				
+				
+			  </div>
+			</div>
+			
+			<!-- Панель с функционалом юнит-тестов -->
+			<div class="panel panel-warning">
+			  <!-- Заголовок -->
+			  <div class="panel-heading">
+				<h3 class="panel-title">Тестирование</h3>
+			  </div>
+			  <!-- Тело панели -->
+			  <div class="panel-body">				  
+				
+				<!-- Кнопка запуска тестов -->
+				<div class="btn-group">	
+				  <button type="button" class="btn btn-default" onclick="mocha.run()">Запуск тестов</button>
+				</div>					
+				
+				<div id="mocha">
+				</div>
+				
+			  </div>
+			  
+			</div>
+			
+		  </div>	
+		  
+	  </div>	
+	  
+    <!-- FAKE REST API -->	
+    <script src="js/FakeRestAPI.js"></script>
+	
+	<!-- Спецификации тестов -->
+	<script src="js/tests.js"></script>
+	
+	<<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+	
+	<!-- AngularJS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>	
+	<script type="text/javascript">angular.module('myApp', []);</script>	
+	<script src="js/controllers/personController.js"></script>
+    
+  </body>
+</html>
